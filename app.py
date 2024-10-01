@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from fastapi import FastAPI, Depends, HTTPException, Request
+from requests.exceptions import HTTPError
 from api_endpoints_config import *
 
 st.set_page_config(layout="wide")
@@ -50,12 +50,12 @@ def authenticate_user(username, password):
                 st.session_state["access_token"] = access_token
                 return True
             else:
-                raise HTTPException(
+                raise HTTPError(
                     status_code=response.status_code,
                     detail=response.json().get("detail", "Authentication failed"),
                 )
         except requests.exceptions.RequestException as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPError(status_code=500, detail=str(e))
     return False
 
 
