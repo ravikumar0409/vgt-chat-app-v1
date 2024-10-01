@@ -75,7 +75,9 @@ def get_response(prompt, chat_mode, username, password):
 
 
 with st.sidebar:
-    st.image("vgt_logo.svg", width=300)
+    st.markdown("<div style='padding-left: 300px;'></div>", unsafe_allow_html=True)
+    st.image('vgt_logo.svg', width=250)
+   
     st.title("VGT Multi Mode ChatBot Application")
     st.markdown("<br/>", unsafe_allow_html=True)
 
