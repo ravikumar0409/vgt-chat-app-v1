@@ -70,7 +70,7 @@ def get_response(prompt, chat_mode, username, password):
             'Authorization': f'Bearer {access_token}'
         }
         response = requests.get(CHAT_URL, headers=headers, params=params)
-        return {"response": response}
+        return response.json()
     return None
 
 
@@ -111,11 +111,11 @@ with st.sidebar:
 
 if "authenticated" in st.session_state and st.session_state["authenticated"]:
 
-    chat_mode = st.selectbox(
-        "Select Chat Mode",
-        ["Normal Conversation", "Document Q&A", "GIS Analytics"],
-        key="chat_mode",
-    )
+    # chat_mode = st.selectbox(
+    #     "Select Chat Mode",
+    #     ["Normal Conversation", "Document Q&A", "GIS Analytics"],
+    #     key="chat_mode",
+    # )
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
@@ -128,7 +128,7 @@ if "authenticated" in st.session_state and st.session_state["authenticated"]:
     if prompt := st.chat_input():
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
-        response = get_response(prompt, chat_mode, username, password)
+        response = get_response(prompt, None, username, password)
         if response:
             msg = response.get("response", "chatbot unable to answer the query asked!")
             st.session_state.messages.append({"role": "assistant", "content": msg})
