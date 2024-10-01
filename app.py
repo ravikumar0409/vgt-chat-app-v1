@@ -78,7 +78,7 @@ with st.sidebar:
     st.markdown("<div style='padding-left: 300px;'></div>", unsafe_allow_html=True)
     st.image('vgt_logo.svg', width=250)
    
-    st.title("VGT Multi Mode ChatBot Application")
+    st.title("Ticket khidakee ChatBot")
     st.markdown("<br/>", unsafe_allow_html=True)
 
     if "authenticated" not in st.session_state:
